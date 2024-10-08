@@ -5,8 +5,32 @@ uniform float uTime;
 
 out vec4 outColor;
 
+float map(vec3 point) {
+	return length(point) - 1.0;
+}
+
 void main()
 {
-    vec2 uv = gl_FragCoord.xy/uResolution;
-    outColor = vec4(1.0f);
+    vec2 uv = (gl_FragCoord.xy * 2. - uResolution.xy ) / uResolution.y;
+    
+    vec3 camera_origin = vec3(0, 0, -3);
+    
+    // With this the rays can be evenly spread cuz thy xy will be the UV
+    vec3 ray_direction = normalize(vec3(uv, 1));
+ 
+ 	vec3 col = vec3(0);
+ 
+    float total_distance_traveled = 0.0f;
+    
+    for(int i = 0; i < 80; i++) {
+    	vec3 point = camera_origin + ray_direction * total_distance_traveled;
+
+    	float m_distance = map(point);
+    
+    	total_distance_traveled += m_distance;
+    }
+    
+    col = vec3(total_distance_traveled * .2);
+             
+    outColor = vec4(col, 1.0f);
 }
