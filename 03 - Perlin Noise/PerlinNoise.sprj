@@ -33,7 +33,7 @@
 		<entry type="file" name="PerlinNoise" shader="vs" />
 		<entry type="file" name="PerlinNoise" shader="ps" />
 		<entry type="camera" fp="false">
-			<distance>4</distance>
+			<distance>5</distance>
 			<pitch>28</pitch>
 			<yaw>317</yaw>
 			<roll>360</roll>
