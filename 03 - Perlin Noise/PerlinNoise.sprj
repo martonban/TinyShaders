@@ -30,6 +30,7 @@
 	<objects />
 	<cameras />
 	<settings>
+		<entry type="property" name="PerlinNoise" item="pipe" />
 		<entry type="file" name="PerlinNoise" shader="vs" />
 		<entry type="file" name="PerlinNoise" shader="ps" />
 		<entry type="camera" fp="false">
