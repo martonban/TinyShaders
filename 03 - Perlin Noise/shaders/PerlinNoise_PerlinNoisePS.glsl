@@ -33,13 +33,12 @@ void main()
 	
 	
 	float grid_numbers = 4.0f;
-
-    
-    uv = uv * grid_numbers;
+	
+	uv = uv * grid_numbers;
     vec2 gridId = floor(uv);
     vec2 gridUv = fract(uv);
    
-  	// Corners Coords
+    // Corners Coords
   	vec2 up_right_corner = gridId + vec2(1.0, 1.0);
   	vec2 up_left_corner = gridId + vec2(0.0, 1.0);
   	vec2 bottom_right_corner = gridId + vec2(1.0, 0.0);
@@ -72,6 +71,9 @@ void main()
   	float t = mix(up_left_dot, up_right_dot, gridUv.x);
   	float b = mix(bottom_left_dot, bottom_right_dot, gridUv.x);
   	float perlin = mix(b, t, gridUv.y);
+	
+    
+    
    
    // Final Color
    vec3 final_color = vec3(perlin + 0.2);
