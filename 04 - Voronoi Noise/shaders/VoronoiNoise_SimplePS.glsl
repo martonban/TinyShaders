@@ -5,6 +5,18 @@ uniform float uTime;
 
 out vec4 outColor;
 
+vec2 noise2x2 (vec2 vector) {
+	float x = dot(vector, vec2(123.4, 234.5));
+	float y = dot(vector, vec2(234.5, 345.6));
+	vec2 gradient = vec2(x, y);
+	
+	gradient = sin(gradient);
+	gradient = gradient * 143758.;
+	gradient = sin(gradient);
+	return gradient;
+}
+
+
 void main()
 {
     vec2 uv = gl_FragCoord.xy/uResolution;
@@ -25,6 +37,10 @@ void main()
     	for(float j = -1.0f; j <= 1.0f; j++) {
     		vec2 grid_coords = vec2(i, j);
     		vec2 point_on_grid_coord = grid_coords;
+    		
+    		point_on_grid_coord = grid_coords + sin(uTime) * 0.5;
+    		vec2 noise = noise2x2(gridId + grid_coords);
+    		point_on_grid_coord = grid_coords + sin(uTime * noise) * 0.5;
     		
     		float distance = length(gridUv - point_on_grid_coord);
     		min_distance_from_pixel = min(distance, min_distance_from_pixel);
