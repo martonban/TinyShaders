@@ -15,6 +15,7 @@ float GetDistance (vec3 point) {
 	return min(sphere_distance, plane_distance);
 }
 
+
 float RayMarching (vec3 camera_pos, vec3 ray_direction) {
 	float distance_from_origin = 0.f;
 	
@@ -33,6 +34,36 @@ float RayMarching (vec3 camera_pos, vec3 ray_direction) {
 }
 
 
+vec3 GetNormal(vec3 p) {
+	float d = GetDistance(p);
+    vec2 e = vec2(.01, 0);
+    
+    vec3 n = d - vec3(
+        GetDistance(p-e.xyy),
+        GetDistance(p-e.yxy),
+        GetDistance(p-e.yyx));
+    
+    return normalize(n);
+}
+
+float GetLight(vec3 point) {
+	vec3 light_pos = vec3(0, 5, 6);
+	light_pos.xz += vec2(sin(uTime), cos(uTime))*2.;
+	vec3 light_vector = normalize(light_pos - point);
+	vec3 surface_normal = GetNormal(point);
+	float diffuse = clamp(dot(light_vector, surface_normal), 0., 1.);
+	
+	// Shadow Calculation
+	float direction = RayMarching(point + surface_normal , vec3(1));
+	if(direction < length(light_pos - point)) {
+		diffuse *= .1;
+	}
+	
+	return diffuse;
+}
+
+
+
 void main()
 {
 	vec2 uv = (gl_FragCoord.xy - .5f * uResolution.xy) / uResolution.y;
@@ -42,8 +73,14 @@ void main()
 	vec3 ray_direction = normalize(vec3(uv, 1.f));
 	
 	float final_distance = RayMarching(camera_pos, ray_direction);
-	final_distance /= 6.;
-	vec3 final_color = vec3(final_distance);
+	
+	vec3 curr_point = camera_pos + ray_direction * final_distance;
+	float diffuse = GetLight(curr_point);
+	
+	vec3 final_color = vec3(diffuse);
+	
+	// Gamma Correction
+	final_color = pow(final_color, vec3(.4545));
 	
 	outColor = vec4(final_color, 1.0f);
 }
