@@ -54,7 +54,7 @@ float GetLight(vec3 point) {
 	float diffuse = clamp(dot(light_vector, surface_normal), 0., 1.);
 	
 	// Shadow Calculation
-	float direction = RayMarching(point + surface_normal , vec3(1));
+	float direction = RayMarching(point + surface_normal * THRESHOLD_DISTANCE * 2. , light_vector);
 	if(direction < length(light_pos - point)) {
 		diffuse *= .1;
 	}
@@ -74,8 +74,8 @@ void main()
 	
 	float final_distance = RayMarching(camera_pos, ray_direction);
 	
-	vec3 curr_point = camera_pos + ray_direction * final_distance;
-	float diffuse = GetLight(curr_point);
+	vec3 point = camera_pos + ray_direction * final_distance;
+	float diffuse = GetLight(point);
 	
 	vec3 final_color = vec3(diffuse);
 	
