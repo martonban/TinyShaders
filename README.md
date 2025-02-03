@@ -12,7 +12,7 @@ In the next section, you can see the smaller shader programming demos that demon
 ## Vorlin Noise
 ![vornil-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/9f3fe404-e62c-4232-9a55-9bacd7059d5b)
 
-# First Raymarcher
-#![RayMarching-ezgif com-crop](https://github.com/user-attachments/assets/dd8b8bac-2e1b-42c1-8c5c-c54acd6192f4)
+## First Raymarcher
+![RayMarching-ezgif com-crop](https://github.com/user-attachments/assets/dd8b8bac-2e1b-42c1-8c5c-c54acd6192f4)
 
 
