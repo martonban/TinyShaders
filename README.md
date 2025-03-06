@@ -15,4 +15,6 @@ In the next section, you can see the smaller shader programming demos that demon
 ## First Raymarcher
 ![RayMarching-ezgif com-crop](https://github.com/user-attachments/assets/dd8b8bac-2e1b-42c1-8c5c-c54acd6192f4)
 
+## Edge Detection
+![edgeDetetction-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/14d5fa45-957d-4be5-81e7-409b73637ef5)
 
